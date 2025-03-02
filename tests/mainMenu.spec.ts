@@ -1,6 +1,6 @@
 import { test as it, expect } from "@playwright/test";
 
-it.describe("Test loading page elements", () => {
+it.describe("Test menu page elements", () => {
   it.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:8000/");
     await page.waitForTimeout(3000);
@@ -8,19 +8,17 @@ it.describe("Test loading page elements", () => {
   });
 
 
-//   it.describe("AUDIO TESTING", () => {
-//     it("verify audio element exists", async ({ page }) => {
-//         await expect(page.locator("#game_audio")).toBeVisible();
-//     });
-    
-//     it("verify the audio is playing", async ({ page }) => {
-//         await expect(page.locator("#game_audio")).toHaveCSS('text-transform','uppercase');
-//     });
+  it.describe("AUDIO TESTING", () => {
+    it("verify the audio is correct", async ({ page }) => {
+        expect(
+            await page.locator("#game_audio").getAttribute("src")
+          ).toContain("menu");
+    });
 
-//     it("verify the audio is correct", async ({ page }) => {
-//         await expect(page.locator("#game_audio")).toHaveCSS('color','rgb(148, 163, 184)');
-//     });
-//   });
+    it("verify the audio is playing", async ({ page }) => {
+        await expect(await page.locator("#game_audio").evaluate(audio => audio.ended)).toBe(false);
+    });
+  });
 
   it.describe("TITLE TESTING", () => {
     it("verify title text", async ({ page }) => {
