@@ -5,6 +5,22 @@ it.describe("Test loading page elements", () => {
     await page.goto("http://localhost:8000/");
   });
 
+  it.describe("TITLE TESTING", () => {
+    it("verify There is no title", async ({ page }) => {
+        await expect(page.locator("#game_title")).toBeHidden();
+    });
+
+    it("verify title top margin", async ({ page }) => {
+        await expect(page.locator("#game_title")).toHaveCSS('margin-top','50px');
+    });
+  });
+
+  it.describe("GAME TEXT testing", () => {
+    it("no game text in the loading screen", async ({ page }) => {
+      await expect(page.locator("#game_text")).toBeHidden();
+    });
+  });
+
   it.describe("GIF testing", () => {
     it("has gif", async ({ page }) => {
       await expect(page.locator("#game_img").locator("img")).toBeVisible();
