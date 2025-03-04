@@ -13,6 +13,7 @@ it.describe("Test Turn choice page elements", () => {
 
   it.describe("AUDIO TESTING", () => {
     it("verify the sound effect ended", async ({ page }) => {
+        await page.waitForTimeout(1000);
         await expect(await page.locator("#game_audio").evaluate(audio => audio.ended)).toBe(true);
     });
   });
