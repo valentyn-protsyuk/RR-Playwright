@@ -22,10 +22,6 @@ it.describe("Test loading page elements", () => {
   });
 
   it.describe("GIF testing", () => {
-    it("has gif", async ({ page }) => {
-      await expect(page.locator("#game_img").locator("img")).toBeVisible();
-    });
-
     it("gif is visible", async ({ page }) => {
       await expect(page.locator("#game_img").locator("img")).toBeVisible();
     });
