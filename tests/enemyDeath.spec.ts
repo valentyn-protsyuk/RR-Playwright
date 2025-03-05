@@ -1,19 +1,18 @@
 import { test as it, expect } from "@playwright/test";
 
-it.describe("Enemy empty transition testing", () => {
+it.describe("Enemy Death transition testing", () => {
   it.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:8000/");
     await page.evaluate(() => {
-        window.next_state("npc_empty"); // force enemy empty transition
+        window.next_state("npc_death"); // force enemy empty transition
     });
   });
-
 
   it.describe("AUDIO TESTING", () => {
     it("verify the audio is correct", async ({ page }) => {
         expect(
             await page.locator("#game_audio").getAttribute("src")
-          ).toContain("click");
+          ).toContain("shot");
     });
 
     it("verify the audio is playing", async ({ page }) => {
@@ -24,7 +23,7 @@ it.describe("Enemy empty transition testing", () => {
   it.describe("TITLE TESTING", () => {
     it("verify title text", async ({ page }) => {
         await expect(page.locator("#game_title")).toHaveText(
-            "Enemy's turn"
+            "Enemy Died!"
           );
     });
 
@@ -49,7 +48,7 @@ it.describe("Enemy empty transition testing", () => {
     it("Correct gif is displayed", async ({ page }) => {
       expect(
         await page.locator("#game_img").locator("img").getAttribute("src")
-      ).toContain("npcLucky");
+      ).toContain("npcDeath");
     });
   });
 
@@ -75,9 +74,9 @@ it.describe("Enemy empty transition testing", () => {
 
   it.describe("Check next state", () => {
     it("Check that the next state title appears", async ({ page }) => {
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(2000);
         await expect(page.locator("#game_title")).toHaveText(
-            "Your turn"
+            "You won!"
           );
     });
   });
