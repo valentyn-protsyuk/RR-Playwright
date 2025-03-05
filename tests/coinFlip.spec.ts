@@ -75,6 +75,7 @@ it.describe("COIN FLIP TRANSITION TESTING", () => {
   it("BOTH OUTCOMES ARE ACCESSIBLE", async ({ page }) => {
     let event1 = false;
     let event2 = false;
+    let pass = true;
     let count = 0;
 
     while (!(event1 && event2)) {
@@ -97,8 +98,11 @@ it.describe("COIN FLIP TRANSITION TESTING", () => {
 
       //chance is 50 50 so 10 attempts should be enough
       if (count > 9) {
+        pass = false;
         break;
       }
     }
+
+    expect(pass).toBe(true);
   });
 });

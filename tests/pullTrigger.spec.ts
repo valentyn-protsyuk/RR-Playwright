@@ -1,7 +1,7 @@
 import { test as it, expect } from "@playwright/test";
 
-it.describe("VERIFY ENEMY TURN IS RANDOM", () => {
-  it("BOTH STATES ARE ACCESSIBLE", async ({ page }) => {
+it.describe("VERIFY PULL TRIGGER IS RANDOM", () => {
+  it("both states should be accessible", async ({ page }) => {
     await page.goto("http://localhost:8000/");
 
     let event1 = false;
@@ -14,16 +14,16 @@ it.describe("VERIFY ENEMY TURN IS RANDOM", () => {
 
       await page.goto("http://localhost:8000/");
       await page.evaluate(() => {
-        window.next_state("start"); // force choose turn screen
+        window.next_state("player_turn"); // force choose your turn
       });
 
-      await page.locator("#but_b").click(); //choose enemy turn
+      await page.locator("#but_a").click(); //choose pull trigger
 
-      if ((await page.locator("#game_title").textContent()) === "Enemy's turn") {
+      if ((await page.locator("#game_title").textContent()) === "Empty!") {
         event1 = true;
       }
 
-      if ((await page.locator("#game_title").textContent()) === "Enemy Died!") {
+      if ((await page.locator("#game_title").textContent()) === "Bang!") {
         event2 = true;
       }
 

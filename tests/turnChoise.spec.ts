@@ -109,9 +109,7 @@ it.describe("Test Turn choice page elements", () => {
 
     it("button onclick navigation", async ({ page }) => {
       await page.locator("#but_b").click();
-      await expect(page.locator("#game_title")).toHaveText(
-        "Enemy's turn"
-      );
+      expect(["Enemy's turn","Enemy Died!"]).toContain(await page.locator("#game_title").textContent());
     });
   });
 
